@@ -6,6 +6,7 @@ import {
 } from "naive-ui";
 import {Preference, UserInfo} from "../assets/types";
 import {fieldOptions, timeOptions} from "../assets/data";
+import axios from "axios";
 
 const message = useMessage();
 
@@ -79,15 +80,22 @@ async function submit() {
   } else if (userInfo.preferences.filter(p => p.fields.length === 0 || p.times.length === 0).length) {
     return message.error(`请先补全"场地信息"`);
   } else {
-    // TODO: SUBMIT
-    canSubmit.value = false;
-    message.success("提交成功。请关闭本页面，静候程序运行", {duration: 5000});
-    setTimeout(() => message.info("将在5秒后跳转到学校官网", {duration: 1000}), 5000);
-    setTimeout(() => message.info("将在4秒后跳转到学校官网", {duration: 1000}), 6000);
-    setTimeout(() => message.info("将在3秒后跳转到学校官网", {duration: 1000}), 7000);
-    setTimeout(() => message.info("将在2秒后跳转到学校官网", {duration: 1000}), 8000);
-    setTimeout(() => message.info("将在1秒后跳转到学校官网", {duration: 1000}), 9000);
-    setTimeout(() => location.href = "https://www.cauc.edu.cn/", 10000);
+    let url = `http://localhost:${port}`;
+    try {
+      canSubmit.value = false;
+      await axios.post(url, userInfo);
+      message.success("提交成功。请关闭本页面，静候程序运行", {duration: 5000});
+      setTimeout(() => message.info("将在5秒后跳转到学校官网", {duration: 1000}), 5000);
+      setTimeout(() => message.info("将在4秒后跳转到学校官网", {duration: 1000}), 6000);
+      setTimeout(() => message.info("将在3秒后跳转到学校官网", {duration: 1000}), 7000);
+      setTimeout(() => message.info("将在2秒后跳转到学校官网", {duration: 1000}), 8000);
+      setTimeout(() => message.info("将在1秒后跳转到学校官网", {duration: 1000}), 9000);
+      setTimeout(() => location.href = "https://www.cauc.edu.cn/", 10000);
+    } catch (e) {
+      console.error(e);
+      message.error(`数据发送失败，请检查客户端是否已启动(${url})`, {duration: 0, closable: true});
+      canSubmit.value = true;
+    }
   }
 }
 </script>
@@ -147,13 +155,5 @@ async function submit() {
 <style scoped>
 .user-input-area {
   min-width: calc(min(90vw, 1200px));
-}
-
-.n-button {
-  margin-left: 4px;
-}
-
-.n-button:nth-child(3) {
-  margin-right: 8px;
 }
 </style>
