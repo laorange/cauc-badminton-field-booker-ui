@@ -2,7 +2,7 @@
 import {onMounted, reactive, ref} from "vue";
 import {
   useMessage, NFormItem, FormRules, NButton, NSpace, NInputNumber,
-  NInput, NDynamicInput, NSelect, NGrid, NGi, NDivider,
+  NInput, NDynamicInput, NSelect, NGrid, NGi, NDivider, NSwitch,
 } from "naive-ui";
 import {Preference, UserInfo} from "../assets/types";
 import {fieldOptions, timeOptions} from "../assets/data";
@@ -18,6 +18,7 @@ const userInfo = reactive<UserInfo>({
   cipher: "",
   account: "",
   password: "",
+  startNow: false,
   fieldNum: 2,
   preferences: [],
 });
@@ -75,14 +76,16 @@ async function submit() {
 <template>
   <div class="user-input-area">
     <template v-if="!showResult">
-      <n-divider><div>用户信息</div></n-divider>
-      <n-grid cols="2" x-gap="10">
-        <n-gi>
+      <n-divider>
+        <div>用户信息</div>
+      </n-divider>
+      <n-grid cols="4" x-gap="10">
+        <n-gi span="2">
           <n-form-item label="校园网账号" path="account" :rule="formRules.account" required>
             <n-input v-model:value="userInfo.account" placeholder="请输入校园网账号"/>
           </n-form-item>
         </n-gi>
-        <n-gi>
+        <n-gi span="2">
           <n-form-item label="校园网密码" path="password" :rule="formRules.password" required>
             <n-input v-model:value="userInfo.password" type="password" placeholder="请输入校园网密码"/>
           </n-form-item>
@@ -93,6 +96,14 @@ async function submit() {
           </n-form-item>
         </n-gi>
         <n-gi>
+          <n-space style="height: 100%" vertical justify="center" align="center">
+            <div>预约当前的场地?</div>
+            <n-switch v-model:value="userInfo.startNow"/>
+            <div v-if="!userInfo.startNow" style="font-size: 12px; color: green">将于06:30开始运行</div>
+            <div v-else style="font-size: 12px; color: green">即刻开始运行</div>
+          </n-space>
+        </n-gi>
+        <n-gi span="2">
           <n-form-item label="暗号" path="account" :rule="formRules.cipher" required>
             <n-input v-model:value="userInfo.cipher" placeholder="请输入暗号"/>
           </n-form-item>
