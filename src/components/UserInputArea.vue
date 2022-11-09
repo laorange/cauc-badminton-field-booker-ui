@@ -81,19 +81,25 @@ async function submit() {
       </n-divider>
       <n-grid cols="4" x-gap="10">
         <n-gi span="2">
-          <n-form-item label="校园网账号" path="account" :rule="formRules.account" required>
-            <n-input v-model:value="userInfo.account" placeholder="请输入校园网账号"/>
-          </n-form-item>
+          <div id="account">
+            <n-form-item label="校园网账号" path="account" :rule="formRules.account" required>
+              <n-input v-model:value="userInfo.account" placeholder="请输入校园网账号"/>
+            </n-form-item>
+          </div>
         </n-gi>
         <n-gi span="2">
-          <n-form-item label="校园网密码" path="password" :rule="formRules.password" required>
-            <n-input v-model:value="userInfo.password" type="password" placeholder="请输入校园网密码"/>
-          </n-form-item>
+          <div id="password">
+            <n-form-item label="校园网密码" path="password" :rule="formRules.password" required>
+              <n-input v-model:value="userInfo.password" type="password" placeholder="请输入校园网密码"/>
+            </n-form-item>
+          </div>
         </n-gi>
         <n-gi>
-          <n-form-item label="预定的场地数" path="fieldNum" :rule="formRules.fieldNum" required>
-            <n-input-number style="width: 100%" :min="0" v-model:value="userInfo.fieldNum" placeholder="请输入预定的场地数"/>
-          </n-form-item>
+          <div id="field-num">
+            <n-form-item label="预定的场地数" path="fieldNum" :rule="formRules.fieldNum" required>
+              <n-input-number style="width: 100%" :min="0" v-model:value="userInfo.fieldNum" placeholder="请输入预定的场地数"/>
+            </n-form-item>
+          </div>
         </n-gi>
         <n-gi>
           <n-space style="height: 100%" vertical justify="center" align="center">
@@ -104,9 +110,11 @@ async function submit() {
           </n-space>
         </n-gi>
         <n-gi span="2">
-          <n-form-item label="暗号" path="account" :rule="formRules.cipher" required>
-            <n-input v-model:value="userInfo.cipher" placeholder="请输入暗号"/>
-          </n-form-item>
+          <div id="cipher">
+            <n-form-item label="暗号" path="account" :rule="formRules.cipher" required>
+              <n-input v-model:value="userInfo.cipher" placeholder="请输入暗号"/>
+            </n-form-item>
+          </div>
         </n-gi>
       </n-grid>
 
