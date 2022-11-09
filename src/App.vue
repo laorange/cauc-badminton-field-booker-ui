@@ -2,9 +2,8 @@
 import CopyrightFooter from "./components/CopyrightFooter.vue";
 import packageJson from "../package.json";
 
-import {NWatermark, NMessageProvider, NDivider} from "naive-ui";
+import {NWatermark, NMessageProvider} from "naive-ui";
 import UserInputArea from "./components/UserInputArea.vue";
-
 </script>
 
 <template>
@@ -13,8 +12,6 @@ import UserInputArea from "./components/UserInputArea.vue";
                :font-size="12" :line-height="10" :width="320" :height="100"
                :font-weight="200" :x-offset="15" :y-offset="0" :rotate="15"/>
   <h1>CAUC羽毛球场预约程序</h1>
-
-  <n-divider><div>用户信息</div></n-divider>
 
   <n-message-provider>
     <UserInputArea/>

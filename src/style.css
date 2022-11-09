@@ -31,7 +31,6 @@ body {
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(100, 200, 250, 30%) 10%, rgba(100, 200, 250, 10%), rgba(100, 200, 250, 30%));
 }
 
 h1 {

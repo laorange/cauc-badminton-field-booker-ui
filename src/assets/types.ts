@@ -4,6 +4,7 @@ export interface Preference {
 }
 
 export interface UserInfo {
+    cipher: string,
     account: string,
     password: string,
     fieldNum: number,
