@@ -1,6 +1,6 @@
 export interface Preference {
     fields: string[],
-    times: string[],
+    times: number[],
 }
 
 export interface UserInfo {
