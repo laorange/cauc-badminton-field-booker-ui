@@ -8,6 +8,5 @@ export interface UserInfo {
     account: string,
     password: string,
     startNow: boolean,
-    fieldNum: number,
     preferences: Preference[]
 }

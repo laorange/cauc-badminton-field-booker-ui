@@ -19,7 +19,6 @@ const userInfo = reactive<UserInfo>({
   account: "",
   password: "",
   startNow: false,
-  fieldNum: 2,
   preferences: [],
 });
 
@@ -46,12 +45,6 @@ const formRules = reactive<FormRules>({
       if (!userInfo.password) return new Error("请输入校园网密码");
     },
   },
-  fieldNum: {
-    trigger: ["input", "blur"],
-    validator: () => {
-      if (!userInfo.fieldNum || userInfo.fieldNum < 0) return new Error("请输入您想预定的场地数");
-    },
-  },
 });
 
 function selectSchoolArea(preference: Preference, schoolArea: string) {
@@ -61,7 +54,7 @@ function selectSchoolArea(preference: Preference, schoolArea: string) {
 const showResult = ref(false);
 
 async function submit() {
-  if (!userInfo.cipher || !userInfo.fieldNum || !userInfo.account || !userInfo.password) {
+  if (!userInfo.cipher || !userInfo.account || !userInfo.password) {
     return message.error(`请先补全"用户信息"`);
   } else if (!userInfo.preferences.length) {
     return message.error(`请先添加"场地信息"`);
@@ -94,26 +87,23 @@ async function submit() {
             </n-form-item>
           </div>
         </n-gi>
-        <n-gi>
-          <div id="field-num">
-            <n-form-item label="预定的场地数" path="fieldNum" :rule="formRules.fieldNum" required>
-              <n-input-number style="width: 100%" :min="0" v-model:value="userInfo.fieldNum" placeholder="请输入预定的场地数"/>
-            </n-form-item>
-          </div>
-        </n-gi>
-        <n-gi>
-          <n-space style="height: 100%" vertical justify="center" align="center">
-            <div>预约当前的场地?</div>
-            <n-switch v-model:value="userInfo.startNow"/>
-            <div v-if="!userInfo.startNow" style="font-size: 12px; color: green">将于06:30开始运行</div>
-            <div v-else style="font-size: 12px; color: green">即刻开始运行</div>
-          </n-space>
-        </n-gi>
-        <n-gi span="2">
+        <n-gi span="3">
           <div id="cipher">
             <n-form-item label="暗号" path="account" :rule="formRules.cipher" required>
               <n-input v-model:value="userInfo.cipher" placeholder="请输入暗号"/>
             </n-form-item>
+          </div>
+        </n-gi>
+        <n-gi>
+          <div style="padding-bottom: 24px">
+            <n-space style="height: 100%" vertical justify="center" align="center">
+              <div>预约当前的场地?</div>
+              <n-space align="center" justify="center">
+                <n-switch v-model:value="userInfo.startNow"/>
+                <div v-if="!userInfo.startNow" style="font-size: 12px; color: green">将于06:30开始运行</div>
+                <div v-else style="font-size: 12px; color: green">即刻开始运行</div>
+              </n-space>
+            </n-space>
           </div>
         </n-gi>
       </n-grid>
