@@ -1,13 +1,15 @@
 {
   "name": "cauc-badminton-field-booker-ui",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --base=/cauc-badminton-field-booker-ui/",
     "preview": "vite preview"
   },
+  "homepage": "https://github.com/laorange/cauc-badminton-field-booker-ui",
+  "bugs": "https://github.com/laorange/cauc-badminton-field-booker-ui/issues",
   "dependencies": {
     "js-base64": "^3.7.2",
     "vue": "^3.2.41"
